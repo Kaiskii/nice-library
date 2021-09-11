@@ -20,6 +20,8 @@ public class ResourceIndex : ScriptableObject
 
         etc... any types you want to index
         */
+
+        {"Test",typeof(ExampleResourceSO)}
     };
 
     [MenuItem("ResourceIndex/Create Index")]
@@ -146,12 +148,11 @@ public class ResourceIndex : ScriptableObject
     public static T GetAsset<T>(int id) where T : Object
     {
         ResourceAsset asset;
-        if (assetTypeDictionary.TryGetValue(typeof(T).FullName+id, out asset))
+        if (assetTypeDictionary.TryGetValue(typeof(T).FullName+"_"+id, out asset))
             return Resources.Load<T>(asset.assetPath);
         return null;
     }
 
-    /*
     /// <summary>
     /// Returns all objects of types T
     /// </summary>
@@ -161,16 +162,22 @@ public class ResourceIndex : ScriptableObject
     {
         List<T> assetList = new List<T>();
         
+        List<string> keylist = new List<string>(assetTypeDictionary.Keys);
+
         //HACKY HACKY
-        for(int i = 0;i<assetTypeDictionary.Count;i++)
+        for(int i = 0;i<keylist.Count;i++)
         {
-        ResourceAsset asset;
-        if (assetTypeDictionary.TryGetValue(typeof(T).FullName+i, out asset))
-            assetList.Add(Resources.Load<T>(asset.assetPath));
+            ResourceAsset asset;
+            string[] split = keylist[i].Split('_');
+
+            if(split[0] == typeof(T).FullName)
+            {
+                if (assetTypeDictionary.TryGetValue(keylist[i], out asset))
+                    assetList.Add(Resources.Load<T>(asset.assetPath));
+            }
         }
         return assetList;
     }
-    */
 
     [System.Serializable]
     public struct ResourceAsset
