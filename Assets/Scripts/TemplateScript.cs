@@ -12,6 +12,8 @@ namespace NiceLib {
       { Same Line
     */
 
+    #pragma warning disable
+    
     string camelCase = "Coding Style";
     string single = "Example of single worded variables";
     const string TEMPLATE_CONST = "const are SCREAMING_CAPS";
@@ -19,8 +21,9 @@ namespace NiceLib {
     [SerializeField]
     string serialize = "Serialize instead of making it Public";
 
-    void Start() {
+    #pragma warning enable
 
+    void Start() {
     }
 
     void Update() {
