@@ -47,10 +47,10 @@ public class ResourceIndex : ScriptableObject
     private static void UpdateIndex()
     {
         var index = Resources.Load<ResourceIndex>("ResourceIndex");
-        index.resources.Clear();
 
         if (index == null) return;
-
+        index.resources.Clear();
+        
         //POPULATE RESOURCE INDEX
         foreach (var currentType in typesToIndex)
         {
