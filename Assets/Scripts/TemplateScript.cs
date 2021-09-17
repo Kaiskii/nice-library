@@ -24,6 +24,7 @@ namespace NiceLib {
     #pragma warning enable
 
     void Start() {
+
     }
 
     void Update() {
